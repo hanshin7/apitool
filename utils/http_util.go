@@ -6,18 +6,36 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"sort"
+	"time"
 )
 
 /*
  * api调用函数，返回结果map
  */
-func requestApi(url string, params map[string]string) map[string]interface{} {
+func RequestApi(url string, apiParams map[string]string) map[string]interface{} {
+	//此处检测空，在调用处约束
+	key_id := apiParams["key_id"]
+	sign_key := apiParams["sign_key"]
+	params := map[string]string{}
+	//公共参数赋值
+	stampStr := fmt.Sprint(time.Now().Unix())
+	params["request_trace_id"] = "TEST" + time.Now().Format("20060102") + stampStr + fmt.Sprint(rand.Intn(1000))
+	params["key_id"] = key_id
+	params["key_version"] = "V1.0"
+	params["timestamp"] = stampStr
+	params["sign_key"] = sign_key
+	//添加api需要的kv
+	for k, v := range apiParams {
+		params[k] = v
+	}
+
 	values := SignByDirectorary(params)
-	resultStr := HttpPost(url, values)
-	print(resultStr)
+	resultStr := httpPost(url, values)
+	println(resultStr)
 	//json结果字符串转map对象
 	resultMap := make(map[string]interface{})
 	err := json.Unmarshal([]byte(resultStr), &resultMap)
@@ -32,7 +50,7 @@ func requestApi(url string, params map[string]string) map[string]interface{} {
  * url:请求地址
  * params:POST请求提交的数据
  */
-func HttpPost(url string, values url.Values) string {
+func httpPost(url string, values url.Values) string {
 	resp, err := http.PostForm(url, values)
 	if err != nil {
 		panic(err)
@@ -71,4 +89,11 @@ func SignByDirectorary(params map[string]string) url.Values {
 		}
 	}
 	return values
+}
+
+/*时间戳->字符串*/
+func Stamp2Str(stamp int64) string {
+	timeLayout := "2006-01-02 15:04:05"
+	str := time.Unix(stamp/1000, 0).Format(timeLayout)
+	return str
 }

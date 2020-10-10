@@ -1,0 +1,10 @@
+{"fields.time":"2020-09-29T03:36:50Z","hostname":"LAPTOP-1URL8KDM","level":"debug","msg":"debug MyLog...","source":"main.go:15","time":"2020-09-29T11:36:50+08:00"}
+time="2020-09-29T11:38:58+08:00" level=debug msg="debug MyLog..." fields.time="2020-09-29T03:38:58Z" hostname=LAPTOP-1URL8KDM source="main.go:15"
+time="2020-09-29T11:41:12+08:00" level=debug msg="debug MyLog..." fields.time="2020-09-29T03:41:12Z" source="main.go:15"
+time="2020-09-29T11:57:23+08:00" level=debug msg="debug MyLog..." fields.time="2020-09-29T03:57:23Z" source="main.go:15"
+time="2020-09-29T13:44:27+08:00" level=debug msg="apitool running" fields.time="2020-09-29T05:44:27Z" source="main.go:14"
+time="2020-09-29T13:44:32+08:00" level=debug msg="apitool running" fields.time="2020-09-29T05:44:32Z" source="main.go:14"
+time="2020-09-29T13:45:05+08:00" level=debug msg="apitool running" fields.time="2020-09-29T05:45:05Z" source="main.go:13"
+time="2020-09-29T13:46:13+08:00" level=debug msg="apitool running" fields.time="2020-09-29T05:46:13Z" source="main.go:14"
+time="2020-09-29T13:46:39+08:00" level=debug msg="apitool running" fields.time="2020-09-29T05:46:39Z" source="main.go:14"
+time="2020-09-29T13:48:21+08:00" level=debug msg="apitool running" fields.time="2020-09-29T05:48:21Z" source="main.go:14"
