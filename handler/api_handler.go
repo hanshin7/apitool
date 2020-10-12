@@ -17,7 +17,7 @@ var mutex sync.Mutex
  */
 func apiMultiHandler(url string, apiParams []map[string]string) {
 	//保存所有请求的响应结果,多线程些，需处理并发安全
-	//allResp := [][]map[string]interface{}{}
+	allResp := []map[string]interface{}{}
 	// 使用5个 goroutine 来创建工作池
 	p := workpool.New(2)
 	var wg sync.WaitGroup
@@ -27,10 +27,10 @@ func apiMultiHandler(url string, apiParams []map[string]string) {
 	//循环并发调用接口
 	for _, apiParamMap := range apiParams {
 		//创建api调用类型体
-		api := apier{
+		api := apiSender{
 			url:         url,
 			apiParamMap: apiParamMap,
-			//allResp: &allResp,
+			allResp:     &allResp,
 		}
 
 		//接口并发调用，最大并发个数由工作池限制
@@ -42,21 +42,33 @@ func apiMultiHandler(url string, apiParams []map[string]string) {
 	wg.Wait()
 	p.Shutdown()
 
+	//加工excel数据
+	exData := dealResp2ExcelData(&allResp)
+	//生成excel
+	utils.CreateExcel(exData)
+
 }
 
-type apier struct {
+//接口响应数据转化成excel数据
+func dealResp2ExcelData(resps *[]map[string]interface{}) *utils.ExcelData {
+	//接口响应数据转化成excel数据
+
+	return nil
+}
+
+type apiSender struct {
 	url         string
 	apiParamMap map[string]string
-	//allResp *[][]map[string]interface{}
+	allResp     *[]map[string]interface{}
 }
 
 // Task 实现 Worker 接口
-func (api *apier) Task() {
+func (api *apiSender) Task() {
 	//处理接口调用业务逻辑
 	resp := utils.RequestApi(api.url, api.apiParamMap)
-	//处理接口返回值
+	//将每个请求返回结果保存到切片
 	mutex.Lock()
-	//api.allResp = append(api.allResp, resp)
+	//指针，多个线程向主线程同一个切片写值
+	*api.allResp = append(*api.allResp, resp)
 	mutex.Unlock()
-
 }

@@ -6,74 +6,46 @@ import (
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
-func CreateExcel(excelName string) {
-	// 列标题
-	titles := map[string][]string{
-		"sheet1": {"姓名", "年龄"},
-		"sheet2": {"姓名1", "年龄1", "身高1"},
-	}
-	//存放所有sheet的名称
-	sheetList := []string{}
-	for k, _ := range titles {
-		sheetList = append(sheetList, k)
-	}
-	// 数据源
-	data := [][]map[string]interface{}{
-		//sheet1数据
-		{
-			map[string]interface{}{"name": "jack", "age": 18},
-			map[string]interface{}{"name": "mary", "age": 28},
-		},
-		//sheet2数据
-		{
-			map[string]interface{}{"name": "jack1", "age1": 18, "sg1": 180},
-			map[string]interface{}{"name": "mary1", "age1": 28, "sq1": 175},
-		},
-	}
+//excel数据体
+type ExcelData struct {
+	//excel文件名称
+	excelName string
+	//sheet名称的切片
+	sheetNameSlice []string
+	//sheet的title
+	sheetTitleSlice [][]string
+	//第一层[]对应每个sheet，第二层[]对应该sheet的数据（多行）,第三层[]对应每一行数据
+	sheetDataSlice [][][]string
+}
 
+//返回文件名、错误标识码
+func CreateExcel(exData *ExcelData) (string, error) {
 	f := excelize.NewFile()
 	// 根据名称创建sheet
-	for k, _ := range titles {
-		f.NewSheet(k)
-	}
-
-	for sheetName, sheetTitle := range titles {
-		//遍历当前sheet的列
-		for clumnNum, clumnVal := range sheetTitle {
+	for index, sheetName := range exData.sheetNameSlice {
+		f.NewSheet(sheetName)
+		println(sheetName)
+		//创建当前sheet的表头
+		for clumnNum, clumnVal := range exData.sheetTitleSlice[index] {
 			sheetPosition := Div(clumnNum+1) + "1"
-			//fmt.Print(sheetPosition)
 			f.SetCellValue(sheetName, sheetPosition, clumnVal)
-			println(clumnVal)
 		}
-
-	}
-	for sheetNum, sheetData := range data {
-		for lineNum, v := range sheetData {
-			clumnNum := 0
-			for _, vv := range v {
-				clumnNum++
-				sheetPosition := Div(clumnNum) + strconv.Itoa(lineNum+2)
-				switch vv.(type) {
-				case string:
-
-					f.SetCellValue(sheetList[sheetNum], sheetPosition, vv.(string))
-					break
-				case int:
-					f.SetCellValue(sheetList[sheetNum], sheetPosition, vv.(int))
-					break
-				case float64:
-					f.SetCellValue(sheetList[sheetNum], sheetPosition, vv.(float64))
-					break
-				}
+		//设置当前sheet的表数据
+		for lineNum, lineVal := range exData.sheetDataSlice[index] {
+			for clumnNum, clumnVal := range lineVal {
+				sheetPosition := Div(clumnNum+1) + strconv.Itoa(lineNum+2)
+				f.SetCellValue(sheetName, sheetPosition, clumnVal)
 			}
 		}
 	}
-	// Set active sheet of the workbook.
-	f.SetActiveSheet(1)
-	// Save xlsx file by the given path.
-	if err := f.SaveAs(excelName + ".xlsx"); err != nil {
+	filename := exData.excelName + ".xlsx"
+	if err := f.SaveAs(filename); err != nil {
 		println(err.Error())
+		return "", err
+	} else {
+		return filename, nil
 	}
+
 }
 
 // Div 数字转字母

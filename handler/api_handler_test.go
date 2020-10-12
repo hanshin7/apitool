@@ -17,15 +17,6 @@ func TestApiMultiHandler(t *testing.T) {
 		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-09-05", "local_id": "110000", "page_id": ""},
 		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-09-01", "local_id": "110000", "page_id": ""},
 		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-09-02", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-09-03", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-10", "end_date": "2020-09-01", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-11", "end_date": "2020-09-01", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-12", "end_date": "2020-09-01", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-13", "end_date": "2020-09-01", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-08-15", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-08-15", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-08-15", "local_id": "110000", "page_id": ""},
-		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "start_date": "2020-08-20", "end_date": "2020-08-15", "local_id": "110000", "page_id": ""},
 	}
 	apiMultiHandler(url, apiParams)
 
