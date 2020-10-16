@@ -17,7 +17,7 @@ var mutex sync.Mutex
  */
 func apiMultiHandler(url string, apiParams []map[string]string) {
 	//保存所有请求的响应结果,多线程些，需处理并发安全
-	allResp := []map[string]interface{}{}
+	allResp := []string{}
 	// 使用5个 goroutine 来创建工作池
 	p := workpool.New(2)
 	var wg sync.WaitGroup
@@ -43,23 +43,44 @@ func apiMultiHandler(url string, apiParams []map[string]string) {
 	p.Shutdown()
 
 	//加工excel数据
-	exData := dealResp2ExcelData(&allResp)
+	exData := dealResp2ExcelData(url, &allResp)
+	println("datalen:", len(exData.SheetDataSlice[0]))
 	//生成excel
-	utils.CreateExcel(exData)
+	filename, err := utils.CreateExcel(exData)
+	if err != nil {
+
+	} else {
+		println(filename)
+	}
 
 }
 
 //接口响应数据转化成excel数据
-func dealResp2ExcelData(resps *[]map[string]interface{}) *utils.ExcelData {
-	//接口响应数据转化成excel数据
+func dealResp2ExcelData(url string, resps *[]string) *utils.ExcelData {
+	fmt.Printf("api result num：%d\n", len(*resps))
+	//创建Excel数据类型结构体
+	exData := utils.ExcelData{
+		ExcelName:       utils.Url2Name(url),
+		SheetNameSlice:  []string{"接口响应报文"},
+		SheetTitleSlice: [][]string{{"请求参数", "响应结果"}},
+	}
 
-	return nil
+	//接口响应报文sheet数据
+	sheetSlice := [][]string{}
+	//接口响应数据转化成excel数据
+	for _, resp := range *resps {
+		lineSlice := []string{resp}
+		//本条数据添加到对应sheet
+		sheetSlice = append(sheetSlice, lineSlice)
+	}
+	exData.SheetDataSlice = [][][]string{sheetSlice}
+	return &exData
 }
 
 type apiSender struct {
 	url         string
 	apiParamMap map[string]string
-	allResp     *[]map[string]interface{}
+	allResp     *[]string
 }
 
 // Task 实现 Worker 接口

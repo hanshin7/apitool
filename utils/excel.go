@@ -9,36 +9,38 @@ import (
 //excel数据体
 type ExcelData struct {
 	//excel文件名称
-	excelName string
+	ExcelName string
 	//sheet名称的切片
-	sheetNameSlice []string
+	SheetNameSlice []string
 	//sheet的title
-	sheetTitleSlice [][]string
+	SheetTitleSlice [][]string
 	//第一层[]对应每个sheet，第二层[]对应该sheet的数据（多行）,第三层[]对应每一行数据
-	sheetDataSlice [][][]string
+	SheetDataSlice [][][]string
 }
 
 //返回文件名、错误标识码
 func CreateExcel(exData *ExcelData) (string, error) {
 	f := excelize.NewFile()
 	// 根据名称创建sheet
-	for index, sheetName := range exData.sheetNameSlice {
+	for index, sheetName := range exData.SheetNameSlice {
 		f.NewSheet(sheetName)
 		println(sheetName)
 		//创建当前sheet的表头
-		for clumnNum, clumnVal := range exData.sheetTitleSlice[index] {
+		for clumnNum, clumnVal := range exData.SheetTitleSlice[index] {
 			sheetPosition := Div(clumnNum+1) + "1"
 			f.SetCellValue(sheetName, sheetPosition, clumnVal)
 		}
+		println("datalen:", len(exData.SheetDataSlice[index]))
 		//设置当前sheet的表数据
-		for lineNum, lineVal := range exData.sheetDataSlice[index] {
+		for lineNum, lineVal := range exData.SheetDataSlice[index] {
+			println("line", lineNum)
 			for clumnNum, clumnVal := range lineVal {
 				sheetPosition := Div(clumnNum+1) + strconv.Itoa(lineNum+2)
 				f.SetCellValue(sheetName, sheetPosition, clumnVal)
 			}
 		}
 	}
-	filename := exData.excelName + ".xlsx"
+	filename := exData.ExcelName + ".xlsx"
 	if err := f.SaveAs(filename); err != nil {
 		println(err.Error())
 		return "", err

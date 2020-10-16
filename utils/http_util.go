@@ -3,7 +3,6 @@ package utils
 import (
 	"bytes"
 	"crypto/sha256"
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
@@ -16,7 +15,7 @@ import (
 /*
  * api调用函数，返回结果map
  */
-func RequestApi(url string, apiParams map[string]string) map[string]interface{} {
+func RequestApi(url string, apiParams map[string]string) string {
 	//此处检测空，在调用处约束
 	key_id := apiParams["key_id"]
 	sign_key := apiParams["sign_key"]
@@ -37,12 +36,12 @@ func RequestApi(url string, apiParams map[string]string) map[string]interface{} 
 	resultStr := httpPost(url, values)
 	println(resultStr)
 	//json结果字符串转map对象
-	resultMap := make(map[string]interface{})
-	err := json.Unmarshal([]byte(resultStr), &resultMap)
-	if err == nil {
-		return nil
-	}
-	return resultMap
+	//resultMap := make(map[string]interface{})
+	//err := json.Unmarshal([]byte(resultStr), &resultMap)
+	//if err == nil {
+	//	return nil
+	//}
+	return resultStr
 }
 
 /**
