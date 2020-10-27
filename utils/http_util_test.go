@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"net/url"
 	"testing"
 )
@@ -43,11 +42,11 @@ func TestRequestApi(t *testing.T) {
 	params["page_no"] = "1"
 	params["sign_key"] = "2a6c2430912644fc8258c7be84d3a1ce"
 	reslut := RequestApi("http://139.198.23.208:80/rsj/ent/keyword/query_list", params)
-	println("----")
+	println(reslut)
 	//循环遍历Map
-	for key, value := range reslut {
-		fmt.Printf("%s=>%s\n", key, value)
-	}
+	//for key, value := range reslut {
+	//	fmt.Printf("%s=>%s\n", key, value)
+	//}
 }
 
 func TestRequestApi1(t *testing.T) {
@@ -60,9 +59,9 @@ func TestRequestApi1(t *testing.T) {
 	params["tel"] = "62bd161831fd778434d97324b66daaf0"
 	params["sign_key"] = "2a6c2430912644fc8258c7be84d3a1ce"
 	reslut := RequestApi("http://139.198.23.208:80/rsj/person/card/finance", params)
-	println("----")
+	println(reslut)
 	//循环遍历Map
-	for key, value := range reslut {
-		fmt.Printf("%s=>%s\n", key, value)
-	}
+	//for key, value := range reslut {
+	//	fmt.Printf("%s=>%s\n", key, value)
+	//}
 }

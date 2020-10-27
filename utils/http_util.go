@@ -16,6 +16,7 @@ import (
  * api调用函数，返回结果map
  */
 func RequestApi(url string, apiParams map[string]string) string {
+	println(url)
 	//此处检测空，在调用处约束
 	key_id := apiParams["key_id"]
 	sign_key := apiParams["sign_key"]
@@ -74,11 +75,13 @@ func SignByDirectorary(params map[string]string) url.Values {
 	buf := bytes.Buffer{}
 	for _, v := range keyList {
 		if v != "sign_key" {
-			buf.WriteString(v + "=" + params[v] + "&")
+			if params[v] != "" {
+				buf.WriteString(v + "=" + params[v] + "&")
+			}
 		}
 	}
 	buf.WriteString("sign_key=" + params["sign_key"])
-	//println(buf.String())
+	println(buf.String())
 	sha256Val := sha256.Sum256(buf.Bytes())
 	params["sign"] = fmt.Sprintf("%x", sha256Val)
 	values := url.Values{}

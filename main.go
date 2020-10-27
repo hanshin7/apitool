@@ -9,8 +9,14 @@ import (
 
 var MyLog = logging.MustGetLogger()
 
-func main() {
+func init() {
+	//初始化日志配置
 	setupLogging()
+
+}
+
+func main() {
+
 	MyLog.Debug("apitool running")
 	service.StartService()
 }

@@ -40,7 +40,7 @@ func CreateExcel(exData *ExcelData) (string, error) {
 			}
 		}
 	}
-	filename := exData.ExcelName + ".xlsx"
+	filename := exData.ExcelName
 	if err := f.SaveAs(filename); err != nil {
 		println(err.Error())
 		return "", err

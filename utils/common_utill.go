@@ -1,17 +1,43 @@
 package utils
 
-import "strings"
+import (
+	"apitool/config"
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
 /**
 * url对应的接口名称
  */
-func Url2Name(url string) string {
-	if strings.Contains(url, "/ent/base/get_ent_info") {
-		return "工商照面信息"
+func GetNameByurl(url string) string {
+	for k, v := range config.Url2NameMap {
+		if strings.Contains(url, k) {
+			return v
+		}
 	}
-	// 添加其他映射
-	//...
-
 	return "未知接口"
+}
 
+//func WriteFile(file string , lines *[]string) {
+//	for _,line := range *lines {
+//		ioutil.WriteFile(file, []byte(line + "\n"), 0666)
+//	}
+//
+//}
+
+func WriteFile(filePath string, lines *[]string) error {
+	f, err := os.Create(filePath)
+	if err != nil {
+		fmt.Printf("create file error: %v\n", err)
+		return err
+	}
+	defer f.Close()
+
+	w := bufio.NewWriter(f)
+	for _, v := range *lines {
+		fmt.Fprintln(w, v)
+	}
+	return w.Flush()
 }
