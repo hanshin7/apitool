@@ -3,6 +3,7 @@ package service
 import (
 	"apitool/config"
 	"apitool/handler"
+	"apitool/model"
 	"bufio"
 	"errors"
 	"fmt"
@@ -33,7 +34,7 @@ func shutdownService() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("page/index.tpl")
+	t, _ := template.ParseFiles("static/page/index.tpl")
 	t.Execute(w, nil)
 }
 
@@ -74,8 +75,19 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("批量查询完成，结果文件名为：%s\n", fileName)
 
-	t, _ := template.ParseFiles("page/entfile_result.tpl")
-	t.Execute(w, "success")
+	var msg string = "success"
+	if err != nil {
+		msg = err.Error()
+	}
+	result := model.ViewResult{
+		msg,
+		fileName + ".csv",
+		fileName + ".xlsx",
+	}
+
+	t, _ := template.ParseFiles("static/page/entfile_result.tpl")
+	t.Execute(w, result)
+
 }
 
 /**
@@ -88,6 +100,7 @@ func parseUploadFile(filePath string, params url.Values) (apiParams []map[string
 	//解析文件到map
 	apiParams = []map[string]string{}
 	f, err := os.Open(filePath)
+	defer f.Close()
 	if err != nil {
 		err = errors.New("打开文件失败:" + err.Error())
 		return

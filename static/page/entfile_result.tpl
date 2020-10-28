@@ -19,18 +19,22 @@
                     <span style="wid 200px;">接口响应数据：</span>
                     <a href="@{'/downloadFile/'+${resultFileName}}" text="${resultFileName}"/>
                     <br/>
-                    <!--<span style="wid 200px;">数据解析文件：</span>-->
+                   <span style="wid 200px;">数据解析文件：</span>-->
                     <!--<a href="@{'/downloadFile/'+${resultXlsFileName}}" text="${resultXlsFileName}"/>-->
+                <!--</div>-->
+                <div >
+                    <span style="width:200px;">接口响应数据：</span>
+                    <a href="../static/download/{{.CsvFileName}}" text="{{.CsvFileName}}">{{.CsvFileName}}</a>
                 </div>
-                <div if="${resultXlsFileName} != null">
-                    <span style="wid 200px;">数据解析文件：</span>
-                    <a href="@{'/downloadFile/'+${resultXlsFileName}}" text="${resultXlsFileName}"/>
+                <div >
+                    <span style="width:200px;">数据解析文件：</span>
+                    <a href="../static/download/{{.XlsFileName}}" text="{{.XlsFileName}}">{{.XlsFileName}}</a>
                 </div>
-                <div if="${resultFileName} == null">
-                    <span text="${result.code}"/>
-                    <span text="${result.msg}"/>
+                <div>
+                    <span style="width:200px;">处理结果：</span>
+                    <span text="{{.Msg}}">{{.Msg}}</span>
                 </div>
-            </div>-->
+            </div>
         </div>
 
     </div>
