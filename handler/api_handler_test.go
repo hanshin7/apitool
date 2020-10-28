@@ -11,7 +11,7 @@ func TestApiMultiHandler(t *testing.T) {
 		//{"key_id": "03136445277747c1","sign_key": "2a6c2430912644fc8258c7be84d3a1ce","keyword": "百度", "page_no": "1"},
 		//{"key_id": "03136445277747c1","sign_key": "2a6c2430912644fc8258c7be84d3a1ce","keyword": "字节跳动", "page_no": "1"},
 	}
-	apiMultiHandler(url, apiParams)
+	ApiMultiHandler(url, apiParams)
 
 	//url := "https://rsj.ronglianyiyun.com/rsj/ent/new_reg_info"
 	//apiParams := []map[string]string{
@@ -27,8 +27,9 @@ func TestApiMultiHandler2(t *testing.T) {
 	url := "rsj/person/passengerstatid/query"
 	apiParams := []map[string]string{
 		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "name": "韩威", "pid": "420117199408201239", "gid": "", "i_month": "12"},
+		{"key_id": "d042cdb5e6344a0d", "sign_key": "b8945357b8ff470bae6e5a804c2722c1", "name": "韩威", "pid": "420117199408201239", "gid": "", "i_month": "12"},
 	}
-	apiMultiHandler(url, apiParams)
+	ApiMultiHandler(url, apiParams)
 
 	//url := "https://rsj.ronglianyiyun.com/rsj/ent/new_reg_info"
 	//apiParams := []map[string]string{

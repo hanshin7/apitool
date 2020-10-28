@@ -9,19 +9,28 @@ import (
 	"strings"
 )
 
-var Url2NameMap map[string]string
+//var Url2NameMap map[string]string
 var Conf *ini.File
 
 func init() {
 	//println("初始化加载文件[urlname.conf]")
 	////初始化读取url和接口名称映射文件
 	//Url2NameMap = initConfig("../Conf/Conf.ini")
-	cfg, err := ini.Load("../config/config.ini")
+	//cfg, err := ini.Load( os.Getenv("GOPATH") + "/config/config.ini")
+	//Conf = cfg
+	//if err != nil {
+	//	fmt.Println("配置文件读取错误", err)
+	//	os.Exit(1)
+	//}
+}
+func InitConfig(path string) {
+	cfg, err := ini.Load(path)
 	Conf = cfg
 	if err != nil {
 		fmt.Println("配置文件读取错误", err)
 		os.Exit(1)
 	}
+	fmt.Println("配置文件加载完成")
 }
 
 /**

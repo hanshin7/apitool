@@ -35,7 +35,7 @@ func RequestApi(url string, apiParams map[string]string) string {
 
 	values := SignByDirectorary(params)
 	resultStr := httpPost(url, values)
-	println(resultStr)
+	//println(resultStr)
 	//json结果字符串转map对象
 	//resultMap := make(map[string]interface{})
 	//err := json.Unmarshal([]byte(resultStr), &resultMap)
@@ -81,7 +81,7 @@ func SignByDirectorary(params map[string]string) url.Values {
 		}
 	}
 	buf.WriteString("sign_key=" + params["sign_key"])
-	println(buf.String())
+	//println(buf.String())
 	sha256Val := sha256.Sum256(buf.Bytes())
 	params["sign"] = fmt.Sprintf("%x", sha256Val)
 	values := url.Values{}

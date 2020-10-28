@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"apitool/config"
+	"errors"
 	"strconv"
 
 	"github.com/360EntSecGroup-Skylar/excelize"
@@ -19,34 +21,30 @@ type ExcelData struct {
 }
 
 //返回文件名、错误标识码
-func CreateExcel(exData *ExcelData) (string, error) {
+func CreateExcel(exData *ExcelData) bool {
 	f := excelize.NewFile()
 	// 根据名称创建sheet
 	for index, sheetName := range exData.SheetNameSlice {
 		f.NewSheet(sheetName)
-		println(sheetName)
 		//创建当前sheet的表头
 		for clumnNum, clumnVal := range exData.SheetTitleSlice[index] {
 			sheetPosition := Div(clumnNum+1) + "1"
 			f.SetCellValue(sheetName, sheetPosition, clumnVal)
 		}
-		println("datalen:", len(exData.SheetDataSlice[index]))
 		//设置当前sheet的表数据
 		for lineNum, lineVal := range exData.SheetDataSlice[index] {
-			println("line", lineNum)
 			for clumnNum, clumnVal := range lineVal {
 				sheetPosition := Div(clumnNum+1) + strconv.Itoa(lineNum+2)
 				f.SetCellValue(sheetName, sheetPosition, clumnVal)
 			}
 		}
 	}
-	filename := exData.ExcelName
-	if err := f.SaveAs(filename); err != nil {
-		println(err.Error())
-		return "", err
-	} else {
-		return filename, nil
+	filepath := config.Conf.Section("sys").Key("file_path").Value() + "/download/" + exData.ExcelName
+	if err := f.SaveAs(filepath); err != nil {
+		err = errors.New(err.Error())
+		return false
 	}
+	return true
 
 }
 

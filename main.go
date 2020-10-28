@@ -1,8 +1,10 @@
 package main
 
 import (
+	"apitool/config"
 	"apitool/logging"
 	"apitool/service"
+	"flag"
 	. "github.com/sirupsen/logrus"
 	"os"
 )
@@ -10,14 +12,18 @@ import (
 var MyLog = logging.MustGetLogger()
 
 func init() {
+
 	//初始化日志配置
 	setupLogging()
-
 }
 
 func main() {
+	var configPath string
+	//参数值地址 参数名称 默认值 参数描述
+	flag.StringVar(&configPath, "config", "./config/config.ini", "config path.")
+	config.InitConfig(configPath)
 
-	MyLog.Debug("apitool running")
+	//MyLog.Debug("apitool running")
 	service.StartService()
 }
 

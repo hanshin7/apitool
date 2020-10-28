@@ -4,7 +4,9 @@ import (
 	"apitool/config"
 	"apitool/utils"
 	"apitool/workpool"
+	"errors"
 	"fmt"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -17,15 +19,19 @@ var mutex sync.Mutex
 * url:请求api路径,不包含ip和端口地址
 * apiParams：多条请求参数，切片存储，每一条切片值对应一次api参数
  */
-func apiMultiHandler(url string, apiParams []map[string]string) {
+func ApiMultiHandler(url string, apiParams []map[string]string) (fileName string, err error) {
 	//保存所有请求的响应结果,多线程些，需处理并发安全
 	allResp := []string{}
+	num, err := strconv.Atoi(config.Conf.Section("sys").Key("workpool_num").Value())
+	if err != nil {
+		return
+	}
 	// 使用n个 goroutine 来创建工作池
-	p := workpool.New(2)
+	p := workpool.New(num)
 	var wg sync.WaitGroup
 	//数量为需调用接口条数
 	wg.Add(len(apiParams))
-	fmt.Printf("workpool=%d tasknum=%d\n", 2, len(apiParams))
+	fmt.Printf("workpool=%d tasknum=%d\n", num, len(apiParams))
 	url_path := config.Conf.Section("sys").Key("http_path").Value() + url
 	//循环并发调用接口
 	for _, apiParamMap := range apiParams {
@@ -45,15 +51,23 @@ func apiMultiHandler(url string, apiParams []map[string]string) {
 	wg.Wait()
 	p.Shutdown()
 
-	fileName := config.Conf.Section("url").Key(url).Value() + fmt.Sprint(time.Now().Unix())
+	fileName = config.Conf.Section("url").Key(url).Value() + fmt.Sprint(time.Now().Unix())
 	//保存接口响应报文到文件
-	utils.WriteFile(fileName+".csv", &allResp)
+	wfErr := utils.WriteFile(config.Conf.Section("sys").Key("file_path").Value()+"/download/"+fileName+".csv", &allResp)
+	if wfErr != nil {
+		return
+	}
 
 	//解析接口数据生成excel文件数据格式,根据不同接口定义不同解析规则
 	exData := utils.ParseRespData(url, fileName, &allResp)
 	//生成excel
-	utils.CreateExcel(exData)
+	ok := utils.CreateExcel(exData)
+	if !ok {
+		err = errors.New("生成excel文件失败")
+		return
+	}
 
+	return
 }
 
 type apiSender struct {
