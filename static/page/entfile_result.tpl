@@ -24,11 +24,11 @@
                 <!--</div>-->
                 <div >
                     <span style="width:200px;">接口响应数据：</span>
-                    <a href="../static/download/{{.CsvFileName}}" text="{{.CsvFileName}}">{{.CsvFileName}}</a>
+                    <a href="../static/file/download/{{.CsvFileName}}" text="{{.CsvFileName}}">{{.CsvFileName}}</a>
                 </div>
                 <div >
                     <span style="width:200px;">数据解析文件：</span>
-                    <a href="../static/download/{{.XlsFileName}}" text="{{.XlsFileName}}">{{.XlsFileName}}</a>
+                    <a href="../static/file/download/{{.XlsFileName}}" text="{{.XlsFileName}}">{{.XlsFileName}}</a>
                 </div>
                 <div>
                     <span style="width:200px;">处理结果：</span>

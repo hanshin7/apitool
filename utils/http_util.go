@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"apitool/logging"
 	"bytes"
 	"crypto/sha256"
 	"fmt"
@@ -16,7 +17,6 @@ import (
  * api调用函数，返回结果map
  */
 func RequestApi(url string, apiParams map[string]string) string {
-	println(url)
 	//此处检测空，在调用处约束
 	key_id := apiParams["key_id"]
 	sign_key := apiParams["sign_key"]
@@ -35,13 +35,6 @@ func RequestApi(url string, apiParams map[string]string) string {
 
 	values := SignByDirectorary(params)
 	resultStr := httpPost(url, values)
-	//println(resultStr)
-	//json结果字符串转map对象
-	//resultMap := make(map[string]interface{})
-	//err := json.Unmarshal([]byte(resultStr), &resultMap)
-	//if err == nil {
-	//	return nil
-	//}
 	return resultStr
 }
 
@@ -58,7 +51,9 @@ func httpPost(url string, values url.Values) string {
 	defer resp.Body.Close()
 
 	result, _ := ioutil.ReadAll(resp.Body)
-	return string(result)
+	resultStr := string(result)
+	logging.LogI(resultStr)
+	return string(resultStr)
 }
 
 /**
@@ -81,7 +76,7 @@ func SignByDirectorary(params map[string]string) url.Values {
 		}
 	}
 	buf.WriteString("sign_key=" + params["sign_key"])
-	//println(buf.String())
+	logging.LogD(buf.String())
 	sha256Val := sha256.Sum256(buf.Bytes())
 	params["sign"] = fmt.Sprintf("%x", sha256Val)
 	values := url.Values{}

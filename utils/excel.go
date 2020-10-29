@@ -2,6 +2,7 @@ package utils
 
 import (
 	"apitool/config"
+	"apitool/logging"
 	"errors"
 	"strconv"
 
@@ -44,6 +45,7 @@ func CreateExcel(exData *ExcelData) bool {
 		err = errors.New(err.Error())
 		return false
 	}
+	logging.LogD("接口响应报文结果文件写文件完成[%s]\n", filepath)
 	return true
 
 }

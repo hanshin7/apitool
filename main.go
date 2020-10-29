@@ -5,36 +5,21 @@ import (
 	"apitool/logging"
 	"apitool/service"
 	"flag"
-	. "github.com/sirupsen/logrus"
-	"os"
 )
-
-var MyLog = logging.MustGetLogger()
 
 func init() {
 
-	//初始化日志配置
-	setupLogging()
-}
-
-func main() {
 	var configPath string
 	//参数值地址 参数名称 默认值 参数描述
 	flag.StringVar(&configPath, "config", "./config/config.ini", "config path.")
 	config.InitConfig(configPath)
-
-	//MyLog.Debug("apitool running")
-	service.StartService()
+	//初始化日志配置
+	level := config.Conf.Section("sys").Key("log_level").Value()
+	logging.Init(level)
+	logging.LogI("配置文件初始化完成")
 }
 
-func setupLogging() {
-	SetLevel(DebugLevel)
-	logPath := "./MyLog.Log"
-	file, err := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0777)
-	if err != nil {
-		MyLog.Fatal("Cannot log to file", err.Error())
-	}
+func main() {
 
-	//SetFormatter(&TextFormatter{})
-	SetOutput(file)
+	service.StartService()
 }

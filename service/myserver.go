@@ -3,10 +3,10 @@ package service
 import (
 	"apitool/config"
 	"apitool/handler"
+	"apitool/logging"
 	"apitool/model"
 	"bufio"
 	"errors"
-	"fmt"
 	"html/template"
 	"io"
 	"net/http"
@@ -19,12 +19,12 @@ import (
 func StartService() {
 	serverPort := config.Conf.Section("sys").Key("server_port").Value()
 	//开放file目录访问权限,可供页面下载
-	fs := http.FileServer(http.Dir("static/file"))
+	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
 	http.HandleFunc("/index", indexHandler)
 	http.HandleFunc("/fileQuery", uploadHandler)
-	fmt.Printf("服务启动，监听端口为[%s]\n", serverPort)
+	logging.LogI("服务监听端口为[%s]\n", serverPort)
 	http.ListenAndServe("localhost:"+serverPort, nil)
 }
 
@@ -48,6 +48,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 		errors.New("文件上传错误!")
 		return
 	}
+	logging.LogI("开始处理批量查询请求，文件[%s]\n", h.Filename)
 	path := config.Conf.Section("sys").Key("file_path").Value()
 	filePath := path + "/upload/" + h.Filename
 	f, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE, 0666)
@@ -58,7 +59,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	io.Copy(f, file)
 	f.Close()
 	file.Close()
-	fmt.Printf("表单上传文件[%s]已保存\n", h.Filename)
+	logging.LogD("表单上传文件[%s]已保存\n", h.Filename)
 
 	//解析表单域
 	r.ParseForm()
@@ -66,14 +67,16 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	//执行接口调用前数据解析处理
 	apiParams, err := parseUploadFile(filePath, r.Form)
 	if err != nil {
+		logging.LogE(err.Error())
 		return
 	}
 	//执行接口调用逻辑
 	fileName, err := handler.ApiMultiHandler(apipath, apiParams)
 	if err != nil {
+		logging.LogE(err.Error())
 		return
 	}
-	fmt.Printf("批量查询完成，结果文件名为：%s\n", fileName)
+	logging.LogD("批量查询完成，结果文件名为：%s\n", fileName)
 
 	var msg string = "success"
 	if err != nil {
@@ -128,6 +131,10 @@ func parseUploadFile(filePath string, params url.Values) (apiParams []map[string
 		params := make(map[string]string)
 		//添加api业务字段
 		for i, v := range lineArr {
+			//特殊处理，参数包含','时在批量文件中替换为';'，此处替换回来
+			if strings.Contains(v, ";") {
+				v = strings.ReplaceAll(v, ";", ",")
+			}
 			params[headLineArr[i]] = v
 		}
 		//密钥字段

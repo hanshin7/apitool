@@ -1,44 +1,55 @@
-package utils
+package rules
 
+/**
+* 通用api解析策略
+* 个人航空出行、个人五要素
+ */
 import (
 	"apitool/config"
 	"apitool/model"
+	"apitool/utils"
 	"encoding/json"
 	"strings"
 )
 
-//接口响应数据转化成excel数据
-func ParseRespData(url string, fileName string, resps *[]string) (exData *ExcelData) {
+type UsualApi struct {
+}
+
+func newUsualApi() UsualApi {
+	instance := new(UsualApi)
+	return *instance
+}
+
+/**
+* 单个sheet，接口响应数据为单层,不存在嵌套类型
+ */
+func (obj UsualApi) ParseApi(url string, resps []string, exData *utils.ExcelData) {
 	//sheet和表头解析,通过url获取配置文件参数
 	sheetName := config.Conf.Section(url).Key("sheet_name").Value()
 	sheetTitle := config.Conf.Section(url).Key("sheet_title").Value()
 	sheetTitleStr := splitKeys(sheetTitle, "|")
+	sheetNameArr := splitKeys(sheetName, "|")
 	//组装SheetTitleSlice
 	sheetTitleArr := [][]string{}
 	for _, sheetTitle := range sheetTitleStr {
 		sheetTitleArr = append(sheetTitleArr, splitKeys(sheetTitle, ","))
 	}
-
-	//创建Excel数据类型结构体
-	exData = &ExcelData{
-		ExcelName:       fileName + ".xlsx",
-		SheetNameSlice:  splitKeys(sheetName, "|"),
-		SheetTitleSlice: sheetTitleArr,
-	}
+	exData.SheetNameSlice = sheetNameArr
+	exData.SheetTitleSlice = sheetTitleArr
 
 	//excel数据填充处理，需要给不同接口制定对应解析规则
-	SheetDataSlice := parseApi(url, resps)
+	SheetDataSlice := parseData(url, resps)
 	exData.SheetDataSlice = SheetDataSlice
-	return
+
 }
 
 /**
 * 单sheet接口解析,data数据根据不同类型不同处理
  */
-func parseApi(url string, resps *[]string) [][][]string {
+func parseData(url string, resps []string) [][][]string {
 	//对应sheet
 	sheetSlice := [][]string{}
-	for _, resp := range *resps {
+	for _, resp := range resps {
 		var apiResp model.ApiRespMsg
 		err := json.Unmarshal([]byte(resp), &apiResp)
 		if err != nil {

@@ -2,6 +2,8 @@ package handler
 
 import (
 	"apitool/config"
+	"apitool/logging"
+	"apitool/rules"
 	"apitool/utils"
 	"apitool/workpool"
 	"errors"
@@ -31,7 +33,7 @@ func ApiMultiHandler(url string, apiParams []map[string]string) (fileName string
 	var wg sync.WaitGroup
 	//数量为需调用接口条数
 	wg.Add(len(apiParams))
-	fmt.Printf("workpool=%d tasknum=%d\n", num, len(apiParams))
+	logging.LogD("workpool=%d tasknum=%d\n", num, len(apiParams))
 	url_path := config.Conf.Section("sys").Key("http_path").Value() + url
 	//循环并发调用接口
 	for _, apiParamMap := range apiParams {
@@ -57,9 +59,10 @@ func ApiMultiHandler(url string, apiParams []map[string]string) (fileName string
 	if wfErr != nil {
 		return
 	}
+	logging.LogD("接口响应报文结果文件写文件完成[%s]\n", fileName+".csv")
 
-	//解析接口数据生成excel文件数据格式,根据不同接口定义不同解析规则
-	exData := utils.ParseRespData(url, fileName, &allResp)
+	//策略模式,根据url自动识别解析规则，解析数据生成excel文件数据格式
+	exData := rules.NewParseApiStrategy(url, fileName, apiParams, allResp)
 	//生成excel
 	ok := utils.CreateExcel(exData)
 	if !ok {

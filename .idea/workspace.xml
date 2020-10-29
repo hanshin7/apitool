@@ -20,12 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4ac9b868-be50-4254-87da-6dc84c2a7763" name="Default Changelist" comment="update">
+      <change afterPath="$PROJECT_DIR$/logging/go_logging.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rules/identity_certification_api.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rules/strategy.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rules/usual_api.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page/entfile_result.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/static/page/entfile_result.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/static/page/index.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/page/index2.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyLog.Log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/handler/api_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/api_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logging/logging.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/myserver.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/myserver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/file/templates/个人五要素核验查询模板文件.csv" beforeDir="false" afterPath="$PROJECT_DIR$/static/file/templates/个人五要素核验查询模板文件.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/file/templates/个人航空出行查询模板文件.csv" beforeDir="false" afterPath="$PROJECT_DIR$/static/file/templates/个人航空出行查询模板文件.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/file/templates/个人铁路出行查询模板文件.csv" beforeDir="false" afterPath="$PROJECT_DIR$/static/file/templates/个人铁路出行查询模板文件.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/page/entfile_result.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/static/page/entfile_result.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/page/index.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/static/page/index.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/excel.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/excel.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/http_util.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/http_util.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/resp_parse.go" beforeDir="false" afterPath="$PROJECT_DIR$/rules/resp_parse.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +86,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\GOWORK\src\apitool\rules" />
       <recent name="E:\GOWORK\src\apitool\static" />
       <recent name="E:\GOWORK\src\apitool\static\file" />
     </key>
@@ -201,6 +215,9 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.log" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -218,30 +235,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="504" y="213" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603848910501">
+    <state x="504" y="213" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603942670043">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="504" y="213" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1603848910501" />
+    <state x="504" y="213" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1603942670043" />
     <state x="845" y="182" key="#xdebugger.evaluate" timestamp="1603791998248">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="845" y="182" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1603791998248" />
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1603878717666">
+    <state width="1493" height="163" key="GridCell.Tab.0.bottom" timestamp="1603965859356">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603878717666" />
-    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1603878717666">
+    <state width="1493" height="163" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603965859356" />
+    <state width="1493" height="163" key="GridCell.Tab.0.center" timestamp="1603965859355">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603878717666" />
-    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1603878717666">
+    <state width="1493" height="163" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603965859355" />
+    <state width="1493" height="163" key="GridCell.Tab.0.left" timestamp="1603965859355">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603878717666" />
-    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1603878717666">
+    <state width="1493" height="163" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603965859355" />
+    <state width="1493" height="163" key="GridCell.Tab.0.right" timestamp="1603965859356">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603878717666" />
+    <state width="1493" height="163" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603965859356" />
     <state width="1493" height="102" key="GridCell.Tab.1.bottom" timestamp="1603870916105">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -262,18 +279,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="392" y="50" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1603877163435" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603876602678">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1603879046425">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603876602678" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1603879046425" />
     <state width="775" height="419" key="XDebugger.FullValuePopup" timestamp="1603768959766">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="775" height="419" key="XDebugger.FullValuePopup/0.0.1536.824@0.0.1536.824" timestamp="1603768959766" />
-    <state x="468" y="10" width="600" height="804" key="find.popup" timestamp="1603871051922">
+    <state x="468" y="10" width="600" height="804" key="find.popup" timestamp="1603943918946">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="468" y="10" width="600" height="804" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1603871051922" />
+    <state x="468" y="10" width="600" height="804" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1603943918946" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603943913470">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603943913470" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -300,12 +321,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/service/myserver.go</url>
-          <line>50</line>
+          <line>51</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/handler/api_handler.go</url>
-          <line>53</line>
+          <line>55</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>

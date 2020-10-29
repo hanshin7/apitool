@@ -9,7 +9,7 @@
 <body>
 <div class="container-fluid">
     <div class="row" style="background-color: darkslategray;height: 80px;">
-        <div class="col-md-24" style="margin-left: 20px;"><h3 style="color: white">融数聚接口测试工具</h3></div>
+        <div class="col-md-24" style="margin-left: 20px;"><h3 style="color: white">接口测试工具</h3></div>
     </div>
     <div class="row">
         <ul id="myTab" class="nav nav-tabs">
@@ -146,28 +146,28 @@
                                 <label class="col-sm-2 control-label">测试接口</label>
                                 <div class="col-sm-4">
                                     <select class="form-control api-ents">
-                                        <option value="ent/base/get_ent_info">工商照面信息</option>
-                                        <option value="ent/base/get_ent_check">抽查检查</option>
-                                        <option value="ent/base/get_ent_mort">动产抵押类信息</option>
-                                        <option value="ent/case/get_case_punish">工商处罚信息</option>
-                                        <option value="ent/stock/get_ent_stock_impawn">股权出质信息</option>
-                                        <option value="ent/stock/get_ent_sfxz">股权冻结</option>
-                                        <option value="ent/stock/get_ent_sfxz_modify">股权强制转让</option>
-                                        <option value="ent/base/get_ent_certificate">行政许可信息</option>
-                                        <option value="ent/base/get_ent_abnormity">经营异常</option>
-                                        <option value="ent/base/get_ent_annual_report">年报信息</option>
-                                        <option value="ent/base/get_ent_modify">企业变更</option>
-                                        <option value="ent/base/get_ent_filiation">企业分支机构信息</option>
-                                        <option value="ent/base/get_ent_manager">企业高管信息</option>
-                                        <option value="ent/stock/get_ent_inv">企业股东出资信息</option>
-                                        <option value="ent/base/get_ent_liquidation">清算信息</option>
-                                        <option value="ent/case/get_case_detail">信用网站公示处罚信息</option>
-                                        <option value="ent/base/get_ent_yzwfsx">严重违法</option>
-                                        <option value="ent/base/get_ent_ipr">知识产权出质信息</option>
-                                        <option value="ent/base/get_ent_all">全量查询</option>
-                                        <option value="ent/risk/actual_controller">实际控制人</option>
-                                        <option value="ent/risk/beneficial_owner">受益所有人识别</option>
-                                        <option value="ent/risk/ent_map">企业图谱</option>
+                                        <option value="/rsj/ent/base/get_ent_info">工商照面信息</option>
+                                        <option value="/rsj/ent/base/get_ent_check">抽查检查</option>
+                                        <option value="/rsj/ent/base/get_ent_mort">动产抵押类信息</option>
+                                        <option value="/rsj/ent/case/get_case_punish">工商处罚信息</option>
+                                        <option value="/rsj/ent/stock/get_ent_stock_impawn">股权出质信息</option>
+                                        <option value="/rsj/ent/stock/get_ent_sfxz">股权冻结</option>
+                                        <option value="/rsj/ent/stock/get_ent_sfxz_modify">股权强制转让</option>
+                                        <option value="/rsj/ent/base/get_ent_certificate">行政许可信息</option>
+                                        <option value="/rsj/ent/base/get_ent_abnormity">经营异常</option>
+                                        <option value="/rsj/ent/base/get_ent_annual_report">年报信息</option>
+                                        <option value="/rsj/ent/base/get_ent_modify">企业变更</option>
+                                        <option value="/rsj/ent/base/get_ent_filiation">企业分支机构信息</option>
+                                        <option value="/rsj/ent/base/get_ent_manager">企业高管信息</option>
+                                        <option value="/rsj/ent/stock/get_ent_inv">企业股东出资信息</option>
+                                        <option value="/rsj/ent/base/get_ent_liquidation">清算信息</option>
+                                        <option value="/rsj/ent/case/get_case_detail">信用网站公示处罚信息</option>
+                                        <option value="/rsj/ent/base/get_ent_yzwfsx">严重违法</option>
+                                        <option value="/rsj/ent/base/get_ent_ipr">知识产权出质信息</option>
+                                        <option value="/rsj/ent/base/get_ent_all">全量查询</option>
+                                        <option value="/rsj/ent/risk/actual_controller">实际控制人</option>
+                                        <option value="/rsj/ent/risk/beneficial_owner">受益所有人识别</option>
+                                        <option value="/rsj/ent/risk/ent_map">企业图谱</option>
                                     </select>
                                 </div>
                             </div>
@@ -195,10 +195,10 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">模板下载</label>
                                 <div class="col-sm-4">
-                                    <a href="../static/templates/个人工商信息查询模板文件.csv">个人工商信息查询模板文件.csv</a><br>
-                                    <a href="../static/templates/个人铁路出行查询模板文件.csv">个人铁路出行查询模板文件.csv</a><br>
-                                    <a href="../static/templates/个人航空出行查询模板文件.csv">个人航空出行查询模板文件.csv</a><br>
-                                    <a href="../static/templates/个人五要素核验查询模板文件.csv">个人五要素核验查询模板文件.csv</a>
+                                    <a href="../static/file/templates/个人工商信息查询模板文件.csv">个人工商信息查询模板文件.csv</a><br>
+                                    <a href="../static/file/templates/个人铁路出行查询模板文件.csv">个人铁路出行查询模板文件.csv</a><br>
+                                    <a href="../static/file/templates/个人航空出行查询模板文件.csv">个人航空出行查询模板文件.csv</a><br>
+                                    <a href="../static/file/templates/个人五要素核验查询模板文件.csv">个人五要素核验查询模板文件.csv</a>
                                 </div>
                             </div>
                             <div class="form-group">
