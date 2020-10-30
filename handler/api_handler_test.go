@@ -1,6 +1,12 @@
 package handler
 
-import "testing"
+import (
+	"apitool/config"
+	"apitool/logging"
+	"apitool/rules"
+	"apitool/utils"
+	"testing"
+)
 
 func TestApiMultiHandler(t *testing.T) {
 	//url := "http://139.198.23.208:80/rsj/ent/keyword/query_list"
@@ -39,4 +45,25 @@ func TestApiMultiHandler2(t *testing.T) {
 	//}
 	//apiMultiHandler(url, apiParams)
 
+}
+
+func TestParseGRGS(t *testing.T) {
+	//config.InitConfig("../config/config.ini")
+	////初始化日志配置
+	//level := config.Conf.Section("sys").Key("log_level").Value()
+	//logging.Init(level)
+	apiParams := []map[string]string{}
+	allResp := []string{"{\"cert\":\"e263405854ff684969bef1a81990aed3\",\"code\":\"RSJ000\",\"data\":{\"ryposshas\":[],\"ryposfrs\":[{\"esdate\":\"2012-10-18\",\"regno\":\"440101400124320\",\"creditcode\":\"91440101054546260E\",\"entname\":\"南洋商业银行(中国)有限公司广州越秀支行\",\"enttype\":\"台、港、澳投资企业分公司\",\"regcap\":\"\",\"palgorithmid\":\"E263405854FF684969BEF1A81990AED3\",\"ryname\":\"冯君\",\"regorgprovince\":\"广东省\",\"industryphyname\":\"金融业\",\"entstatus\":\"注销\",\"regcapcur\":\"人民币元\"}],\"entcaseinfos\":[],\"punisheds\":[],\"punishbreaks\":[],\"rypospers\":[]},\"msg\":\"成功\",\"response_sign\":\"460ccbd29a5803852d90b2ed9fec7430a8b719a084f07065a3160265c0f16db1\"}"}
+	exData := rules.NewParseApiStrategy("rsj/person/gsinfo/query", "test111", apiParams, allResp)
+	//生成excel
+	ok := utils.CreateExcel(exData)
+	println(ok)
+}
+
+func TestMain(m *testing.M) {
+	//m.Run()
+	config.InitConfig("../config/config.ini")
+	//初始化日志配置
+	level := config.Conf.Section("sys").Key("log_level").Value()
+	logging.Init(level)
 }

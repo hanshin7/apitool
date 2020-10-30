@@ -32,6 +32,9 @@ func CreateExcel(exData *ExcelData) bool {
 			sheetPosition := Div(clumnNum+1) + "1"
 			f.SetCellValue(sheetName, sheetPosition, clumnVal)
 		}
+		if exData.SheetDataSlice == nil || len(exData.SheetDataSlice) == 0 {
+			continue
+		}
 		//设置当前sheet的表数据
 		for lineNum, lineVal := range exData.SheetDataSlice[index] {
 			for clumnNum, clumnVal := range lineVal {

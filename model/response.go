@@ -7,7 +7,7 @@ type ApiRespMsg struct {
 	Data interface{} `json:"data"`
 }
 
-type ViewResult struct {
+type PageResult struct {
 	Msg         string
 	CsvFileName string
 	XlsFileName string

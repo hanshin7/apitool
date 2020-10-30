@@ -82,7 +82,7 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		msg = err.Error()
 	}
-	result := model.ViewResult{
+	result := model.PageResult{
 		msg,
 		fileName + ".csv",
 		fileName + ".xlsx",
