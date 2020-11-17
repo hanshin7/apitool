@@ -22,92 +22,86 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">单条查询</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" id="entform" action="/entQuery" method="post">
+                        <form class="form-horizontal" id="entform" action="/singleQuery" method="post">
                             <div class="form-group">
                                 <label for="mykey" class="col-sm-2 control-label">机构标识</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="mykey" placeholder="输入机构标识秘钥串">
+                                    <input type="text" class="form-control" id="mykey" name="mykey" placeholder="输入机构标识秘钥串">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="signkey" class="col-sm-2 control-label">签名秘钥</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="signkey" placeholder="输入签名秘钥串">
+                                    <input type="text" class="form-control" id="signkey" name="signkey" placeholder="输入签名秘钥串">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">测试接口</label>
                                 <div class="col-sm-4">
-                                    <select class="form-control api-ent">
-                                        <option value="ent/base/get_ent_info">工商照面信息</option>
-                                        <option value="ent/base/get_ent_check">抽查检查</option>
-                                        <option value="ent/base/get_ent_mort">动产抵押类信息</option>
-                                        <option value="ent/case/get_case_punish">工商处罚信息</option>
-                                        <option value="ent/stock/get_ent_stock_impawn">股权出质信息</option>
-                                        <option value="ent/stock/get_ent_sfxz">股权冻结</option>
-                                        <option value="ent/stock/get_ent_sfxz_modify">股权强制转让</option>
-                                        <option value="ent/base/get_ent_certificate">行政许可信息</option>
-                                        <option value="ent/base/get_ent_abnormity">经营异常</option>
-                                        <option value="ent/base/get_ent_annual_report">年报信息</option>
-                                        <option value="ent/base/get_ent_modify">企业变更</option>
-                                        <option value="ent/base/get_ent_filiation">企业分支机构信息</option>
-                                        <option value="ent/base/get_ent_manager">企业高管信息</option>
-                                        <option value="ent/stock/get_ent_inv">企业股东出资信息</option>
-                                        <option value="ent/base/get_ent_liquidation">清算信息</option>
-                                        <option value="ent/case/get_case_detail">信用网站公示处罚信息</option>
-                                        <option value="ent/base/get_ent_yzwfsx">严重违法</option>
-                                        <option value="ent/base/get_ent_ipr">知识产权出质信息</option>
-                                        <option value="ent/base/get_ent_all">全量查询</option>
-                                        <option value="ent/risk/foreign_lose_info">对外投资企业失信标签</option>
-                                        <option value="ent/risk/equity_lose_info">股东失信标签</option>
-                                        <option value="ent/risk/abnormal_operation_info">经营异常名录标签</option>
-                                        <option value="ent/risk/illegal_tag_info">严重违法失信标签</option>
-                                        <option value="ent/risk/base_tag_info">状态异常标签</option>
-                                        <option value="ent/risk/equity_freeze_info">股权冻结标签</option>
-                                        <option value="ent/risk/all_tag_info">综合风险特征查询标签</option>
-                                        <option value="ent/risk/actual_controller">实际控制人</option>
-                                        <option value="ent/risk/beneficial_owner">受益所有人识别</option>
-                                        <option value="ent/risk/ent_map">企业图谱</option>
-                                        <option value="person/passengerstatid/query">个人航空服务报告</option>
-                                        <option value="person/railwaylabel/query">个人铁路服务报告</option>
-                                        <option value="ent/new_reg_info">新企速递</option>
+                                    <select class="form-control api-ent" name="apipath">
+                                        <option value="rsj/ent/base/get_ent_info">工商照面信息</option>
+                                        <option value="rsj/ent/base/get_ent_check">抽查检查</option>
+                                        <option value="rsj/ent/base/get_ent_mort">动产抵押类信息</option>
+                                        <option value="rsj/ent/case/get_case_punish">工商处罚信息</option>
+                                        <option value="rsj/ent/stock/get_ent_stock_impawn">股权出质信息</option>
+                                        <option value="rsj/ent/stock/get_ent_sfxz">股权冻结</option>
+                                        <option value="rsj/ent/stock/get_ent_sfxz_modify">股权强制转让</option>
+                                        <option value="rsj/ent/base/get_ent_certificate">行政许可信息</option>
+                                        <option value="rsj/ent/base/get_ent_abnormity">经营异常</option>
+                                        <option value="rsj/ent/base/get_ent_annual_report">年报信息</option>
+                                        <option value="rsj/ent/base/get_ent_modify">企业变更</option>
+                                        <option value="rsj/ent/base/get_ent_filiation">企业分支机构信息</option>
+                                        <option value="rsj/ent/base/get_ent_manager">企业高管信息</option>
+                                        <option value="rsj/ent/stock/get_ent_inv">企业股东出资信息</option>
+                                        <option value="rsj/ent/base/get_ent_liquidation">清算信息</option>
+                                        <option value="rsj/ent/case/get_case_detail">信用网站公示处罚信息</option>
+                                        <option value="rsj/ent/base/get_ent_yzwfsx">严重违法</option>
+                                        <option value="rsj/rsj/ent/base/get_ent_ipr">知识产权出质信息</option>
+                                        <option value="rsj/ent/base/get_ent_all">全量查询</option>
+                                        <option value="rsj/ent/risk/foreign_lose_info">对外投资企业失信标签</option>
+                                        <option value="rsj/ent/risk/equity_lose_info">股东失信标签</option>
+                                        <option value="rsj/ent/risk/abnormal_operation_info">经营异常名录标签</option>
+                                        <option value="rsj/ent/risk/illegal_tag_info">严重违法失信标签</option>
+                                        <option value="rsj/ent/risk/base_tag_info">状态异常标签</option>
+                                        <option value="rsj/ent/risk/equity_freeze_info">股权冻结标签</option>
+                                        <option value="rsj/ent/risk/all_tag_info">综合风险特征查询标签</option>
+                                        <option value="rsj/ent/risk/actual_controller">实际控制人</option>
+                                        <option value="rsj/ent/risk/beneficial_owner">受益所有人识别</option>
+                                        <option value="rsj/ent/risk/ent_map">企业图谱</option>
+                                        <option value="rsj/person/passengerstatid/query">个人航空服务报告</option>
+                                        <option value="rsj/person/railwaylabel/query">个人铁路服务报告</option>
+                                        <option value="rsj/ent/new_reg_info">新企速递</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="uniscid" class="col-sm-2 control-label">统一信用代码</label>
+                                <label for="param1" class="col-sm-2 control-label">参数1</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="uniscid" placeholder="输入信用代码，信用代码和企业名称可只填其一">
+                                    <input type="text" class="form-control" id="param1" name="param1" placeholder="输入字段名和值冒号分隔，如 name:张三,可为空">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="entname" class="col-sm-2 control-label">企业名称</label>
+                                <label for="param2" class="col-sm-2 control-label">参数2</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="entname" placeholder="输入企业名称，信用代码和企业名称可只填其一">
+                                    <input type="text" class="form-control" id="param2" name="param2" placeholder="输入字段名和值冒号分隔，如 name:张三,可为空">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="param1" class="col-sm-2 control-label">自定义参数1</label>
+                                <label for="param3" class="col-sm-2 control-label">参数3</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="param1" placeholder="输入字段名和值冒号分隔，如 name:张三">
+                                    <input type="text" class="form-control" id="param3" name="param3" placeholder="输入字段名和值冒号分隔，如 name:张三,可为空">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="param2" class="col-sm-2 control-label">自定义参数2</label>
+                                <label for="param4" class="col-sm-2 control-label">参数4</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="param2" placeholder="输入字段名和值冒号分隔，如 name:张三">
+                                    <input type="text" class="form-control" id="param4" name="param4" placeholder="输入字段名和值冒号分隔，如 name:张三,可为空">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="param3" class="col-sm-2 control-label">自定义参数3</label>
+                                <label for="param4" class="col-sm-2 control-label">参数5</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="param3" placeholder="输入字段名和值冒号分隔，如 name:张三">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="param4" class="col-sm-2 control-label">自定义参数4</label>
-                                <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="param4" placeholder="输入字段名和值冒号分隔，如 name:张三">
+                                    <input type="text" class="form-control" id="param5" name="param5" placeholder="输入字段名和值冒号分隔，如 name:张三,可为空">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -223,6 +217,7 @@
                                         <option value="rsj/person/railwaylabel/query">个人铁路出行</option>
                                         <option value="rsj/person/network/identity_certification">个人五要素核验</option>
                                         <option value="rsj/ent/base/get_ent_check">抽查检查</option>
+                                        <option value="rsj/ent/base/get_ent_info">工商照面信息</option>
                                     </select>
                                 </div>
                             </div>

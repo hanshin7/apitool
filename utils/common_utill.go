@@ -3,7 +3,9 @@ package utils
 import (
 	"bufio"
 	"fmt"
+	"net/url"
 	"os"
+	"strings"
 )
 
 /**
@@ -38,4 +40,33 @@ func WriteFile(filePath string, lines *[]string) error {
 		fmt.Fprintln(w, v)
 	}
 	return w.Flush()
+}
+
+func ParseFormParams(params url.Values, apiParams map[string]string) {
+	param1 := params["param1"][0]
+	param2 := params["param2"][0]
+	param3 := params["param3"][0]
+	param4 := params["param4"][0]
+	param5 := params["param5"][0]
+
+	if strings.Contains(param1, ":") {
+		arr := strings.Split(param1, ":")
+		apiParams[arr[0]] = arr[1]
+	}
+	if strings.Contains(param2, ":") {
+		arr := strings.Split(param2, ":")
+		apiParams[arr[0]] = arr[1]
+	}
+	if strings.Contains(param3, ":") {
+		arr := strings.Split(param3, ":")
+		apiParams[arr[0]] = arr[1]
+	}
+	if strings.Contains(param4, ":") {
+		arr := strings.Split(param4, ":")
+		apiParams[arr[0]] = arr[1]
+	}
+	if strings.Contains(param5, ":") {
+		arr := strings.Split(param5, ":")
+		apiParams[arr[0]] = arr[1]
+	}
 }

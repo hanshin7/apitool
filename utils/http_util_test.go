@@ -65,3 +65,17 @@ func TestRequestApi1(t *testing.T) {
 	//	fmt.Printf("%s=>%s\n", key, value)
 	//}
 }
+
+func TestHttpPost2(t *testing.T) {
+	postUrl := "https://rsj.ronglianyiyun.com/rsj/ent/base/get_ent_info"
+	params := url.Values{}
+	params.Add("key_id", "03136445277747c1")
+	params.Add("key_version", "V1.0")
+	params.Add("keyword", "阿里巴巴")
+	params.Add("page_no", "1")
+	params.Add("request_trace_id", "TEST202009291418496")
+	params.Add("timestamp", "1601360329")
+	params.Add("sign", "4c89567fca7cd23f3defc53b58b9454339d9b14b6ffd3f16ad3e615264773f44")
+	resp := httpPost(postUrl, params)
+	print(resp)
+}

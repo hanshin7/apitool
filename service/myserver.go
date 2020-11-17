@@ -5,7 +5,9 @@ import (
 	"apitool/handler"
 	"apitool/logging"
 	"apitool/model"
+	"apitool/utils"
 	"bufio"
+	"encoding/json"
 	"errors"
 	"html/template"
 	"io"
@@ -21,8 +23,8 @@ func StartService() {
 	//开放file目录访问权限,可供页面下载
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
-
 	http.HandleFunc("/index", indexHandler)
+	http.HandleFunc("/singleQuery", singleQueryHandler)
 	http.HandleFunc("/fileQuery", uploadHandler)
 	logging.LogI("服务监听端口为[%s]\n", serverPort)
 	http.ListenAndServe("localhost:"+serverPort, nil)
@@ -36,6 +38,45 @@ func shutdownService() {
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	t, _ := template.ParseFiles("static/page/index.tpl")
 	t.Execute(w, nil)
+}
+
+func singleQueryHandler(w http.ResponseWriter, r *http.Request) {
+
+	//解析表单域
+	r.ParseForm()
+	params := r.Form
+
+	apiParams := map[string]string{}
+	//公共参数
+	apipath := params["apipath"][0]
+	apiParams["key_id"] = params["mykey"][0]
+	apiParams["sign_key"] = params["signkey"][0]
+	//解析自定义参数域
+	utils.ParseFormParams(params, apiParams)
+
+	url := config.Conf.Section("sys").Key("http_path").Value() + apipath
+	//处理接口调用业务逻辑
+	resp := utils.RequestApi(url, apiParams)
+	var apiResp model.ApiRespMsg
+	result := model.SingleQueryResult{}
+	err := json.Unmarshal([]byte(resp), &apiResp)
+	if err != nil {
+		result.Code = "SYSERR"
+		result.Msg = err.Error()
+	} else {
+		data, _ := json.Marshal(apiResp.Data)
+		//result := model.SingleQueryResult {
+		//	apiResp.Code,
+		//	apiResp.Msg,
+		//	string(data),
+		//}
+		result.Code = apiResp.Code
+		result.Msg = apiResp.Msg
+		result.Data = string(data)
+	}
+
+	t, _ := template.ParseFiles("static/page/single_result.tpl")
+	t.Execute(w, result)
 }
 
 /**
@@ -83,12 +124,13 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 		msg = err.Error()
 	}
 	result := model.PageResult{
+		"",
 		msg,
 		fileName + ".csv",
 		fileName + ".xlsx",
 	}
 
-	t, _ := template.ParseFiles("static/page/entfile_result.tpl")
+	t, _ := template.ParseFiles("static/page/bfile_result.tpl")
 	t.Execute(w, result)
 
 }

@@ -8,7 +8,14 @@ type ApiRespMsg struct {
 }
 
 type PageResult struct {
+	Code        string
 	Msg         string
 	CsvFileName string
 	XlsFileName string
+}
+
+type SingleQueryResult struct {
+	Code string
+	Msg  string
+	Data string
 }

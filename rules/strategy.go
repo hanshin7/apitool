@@ -32,6 +32,8 @@ func NewParseApiStrategy(url string, fileName string, apiParams []map[string]str
 		p.Strategy = newUsualChildrenApi(apiParams)
 	case "rsj/ent/base/get_ent_check":
 		p.Strategy = newUsualChildrenApi(apiParams)
+	case "rsj/ent/base/get_ent_info":
+		p.Strategy = newUsualChildrenApi(apiParams)
 	default:
 		//普通接口解析
 		p.Strategy = newUsualApi()

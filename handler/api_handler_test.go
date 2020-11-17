@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"apitool/config"
-	"apitool/logging"
 	"apitool/rules"
 	"apitool/utils"
 	"testing"
@@ -60,10 +58,10 @@ func TestParseGRGS(t *testing.T) {
 	println(ok)
 }
 
-func TestMain(m *testing.M) {
-	//m.Run()
-	config.InitConfig("../config/config.ini")
-	//初始化日志配置
-	level := config.Conf.Section("sys").Key("log_level").Value()
-	logging.Init(level)
-}
+//func TestMain(m *testing.M) {
+//	//m.Run()
+//	//config.InitConfig("../config/config.ini")
+//	//初始化日志配置
+//	level := config.Conf.Section("sys").Key("log_level").Value()
+//	logging.Init(level)
+//}
