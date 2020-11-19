@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>融数聚接口测试工具</title>
+    <title>接口测试工具</title>
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" />
@@ -22,6 +22,11 @@
                    <span style="wid 200px;">数据解析文件：</span>-->
                     <!--<a href="@{'/downloadFile/'+${resultXlsFileName}}" text="${resultXlsFileName}"/>-->
                 <!--</div>-->
+                <div style="color: #a94442;font-style: oblique">
+                    <span style="width:200px;">处理结果：</span>
+                    <span text="{{.Msg}}">{{.Msg}}</span>
+                    <br/>
+                </div>
                 <div >
                     <span style="width:200px;">接口响应数据：</span>
                     <a href="../static/file/download/{{.CsvFileName}}" text="{{.CsvFileName}}">{{.CsvFileName}}</a>
@@ -30,10 +35,7 @@
                     <span style="width:200px;">数据解析文件：</span>
                     <a href="../static/file/download/{{.XlsFileName}}" text="{{.XlsFileName}}">{{.XlsFileName}}</a>
                 </div>
-                <div>
-                    <span style="width:200px;">处理结果：</span>
-                    <span text="{{.Msg}}">{{.Msg}}</span>
-                </div>
+
             </div>
         </div>
 

@@ -9,6 +9,8 @@ import (
 	"apitool/model"
 	"apitool/utils"
 	"encoding/json"
+	"fmt"
+	"reflect"
 	"strings"
 )
 
@@ -84,7 +86,11 @@ func parseUsualChildrenData(url string, apiParams []map[string]string, resps []s
 			} else {
 				sheetSlice := parseChildrenData(url, apiParams[i], apiResp.Data.(map[string]interface{}), v, allSheetTitleKeyArr[k], baseColKeyArr)
 				//切片合并
-				sheetDataSlice[k] = append(sheetDataSlice[k], sheetSlice...)
+				if len(sheetDataSlice) == 0 {
+
+				}
+				//sheetDataSlice[k] = append(sheetDataSlice[k], sheetSlice...)
+				sheetDataSlice = append(sheetDataSlice, sheetSlice)
 			}
 		}
 
@@ -108,12 +114,12 @@ func parseUsualChildrenData(url string, apiParams []map[string]string, resps []s
  */
 func parseChildrenData(url string, apiParam map[string]string, data map[string]interface{}, sheetNameKey string, sheetTitleKeyArr []string, baseColKeyArr []string) (sheetSlice [][]string) {
 
-	var baseColLen int
-	if baseColKeyArr == nil {
-		baseColLen = 0
-	} else {
-		baseColLen = len(baseColKeyArr)
-	}
+	//var baseColLen int
+	//if baseColKeyArr == nil {
+	//	baseColLen = 0
+	//} else {
+	//	baseColLen = len(baseColKeyArr)
+	//}
 
 	baseColVal := []string{}
 	for _, v := range baseColKeyArr {
@@ -132,21 +138,33 @@ func parseChildrenData(url string, apiParam map[string]string, data map[string]i
 	value, exist := data[sheetNameKey]
 	if exist {
 		//切片，切片存储类型为map
-		lineSlice := value.([]map[string]interface{})
+		var lineSlice []map[string]interface{}
+		valType := fmt.Sprintf("%v", reflect.TypeOf(value))
+		//为了统一格式处理，map先存放到数组
+		if strings.EqualFold(valType, "map[string]interface {}") {
+			v := value.(map[string]interface{})
+			lineSlice = append(lineSlice, v)
+		} else {
+			lineSlice = value.([]map[string]interface{})
+		}
+
 		if lineSlice != nil && len(lineSlice) > 0 {
 			for _, lineMap := range lineSlice {
-				lineData := make([]string, len(sheetTitleKeyArr)+baseColLen)
-				if baseColLen > 0 {
-					lineData = append(lineData, baseColVal...)
-				}
-				for k, v := range sheetTitleKeyArr {
+				//lineData := make([]string, len(sheetTitleKeyArr)+baseColLen)
+				lineData := baseColVal
+				//if baseColLen > 0 {
+				//	lineData = append(lineData, baseColVal...)
+				//}
+				for _, v := range sheetTitleKeyArr {
 					//字段在配置文件中指定，是否存在该字段
 					value, exist := lineMap[v]
 					//第0为保留字段，给非接口字段使用
 					if exist {
-						lineData[k+baseColLen] = value.(string)
+						lineData = append(lineData, value.(string))
+						//lineData[k+baseColLen] = value.(string)
 					} else {
-						lineData[k+baseColLen] = ""
+						lineData = append(lineData, "")
+						//lineData[k+baseColLen] = ""
 					}
 				}
 				sheetSlice = append(sheetSlice, lineData)

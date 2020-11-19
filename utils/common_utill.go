@@ -43,30 +43,20 @@ func WriteFile(filePath string, lines *[]string) error {
 }
 
 func ParseFormParams(params url.Values, apiParams map[string]string) {
-	param1 := params["param1"][0]
-	param2 := params["param2"][0]
-	param3 := params["param3"][0]
-	param4 := params["param4"][0]
-	param5 := params["param5"][0]
+	pList := make([]string, 5)
+	pList = append(pList, params["param1"][0])
+	pList = append(pList, params["param2"][0])
+	pList = append(pList, params["param3"][0])
+	pList = append(pList, params["param4"][0])
+	pList = append(pList, params["param5"][0])
+	for _, p := range pList {
+		appendApiParam(p, apiParams)
+	}
+}
 
-	if strings.Contains(param1, ":") {
-		arr := strings.Split(param1, ":")
-		apiParams[arr[0]] = arr[1]
-	}
-	if strings.Contains(param2, ":") {
-		arr := strings.Split(param2, ":")
-		apiParams[arr[0]] = arr[1]
-	}
-	if strings.Contains(param3, ":") {
-		arr := strings.Split(param3, ":")
-		apiParams[arr[0]] = arr[1]
-	}
-	if strings.Contains(param4, ":") {
-		arr := strings.Split(param4, ":")
-		apiParams[arr[0]] = arr[1]
-	}
-	if strings.Contains(param5, ":") {
-		arr := strings.Split(param5, ":")
+func appendApiParam(param string, apiParams map[string]string) {
+	if strings.Contains(param, ":") {
+		arr := strings.Split(param, ":")
 		apiParams[arr[0]] = arr[1]
 	}
 }

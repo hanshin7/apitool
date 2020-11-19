@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>融数聚接口测试工具</title>
+    <title>接口测试工具</title>
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/bootstrap/js/bootstrap.js"></script>
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.css" />
@@ -68,9 +68,15 @@
                                         <option value="rsj/ent/risk/actual_controller">实际控制人</option>
                                         <option value="rsj/ent/risk/beneficial_owner">受益所有人识别</option>
                                         <option value="rsj/ent/risk/ent_map">企业图谱</option>
+                                        <option value="rsj/ent/general/recruitment_info">企业招聘信息</option>
+                                        <option value="rsj/ent/general/pop_feel_info">企业舆情信息</option>
+                                        <option value="rsj/ent/new_reg_info">新企速递</option>
+                                        <option value="rsj/person/card/finance">智慧网点</option>
                                         <option value="rsj/person/passengerstatid/query">个人航空服务报告</option>
                                         <option value="rsj/person/railwaylabel/query">个人铁路服务报告</option>
-                                        <option value="rsj/ent/new_reg_info">新企速递</option>
+                                        <option value="rsj/person/network/identity_certification">个人五要素核验</option>
+                                        <option value="rsj/person/gsinfo/query">个人工商信息查询</option>
+                                        <option value="rsj/person/gsinfo/common">个人工商信息查询(通用)</option>
                                     </select>
                                 </div>
                             </div>
@@ -121,19 +127,19 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">模板下载</label>
                                 <div class="col-sm-4">
-                                    <a href="企业查询模板文件.csv">企业查询模板文件.csv</a>
+                                    <a href="../static/file/templates/企业查询模板文件.csv">企业查询模板文件.csv</a>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="bmykey" class="col-sm-2 control-label">机构标识</label>
+                                <label for="pmykey" class="col-sm-2 control-label">机构标识</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="bmykey" name="bmykey" placeholder="输入机构标识秘钥串">
+                                    <input type="text" class="form-control" id="pmykey" name="pmykey" placeholder="输入机构标识秘钥串">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="bsignkey" class="col-sm-2 control-label">签名秘钥</label>
+                                <label for="psignkey" class="col-sm-2 control-label">签名秘钥</label>
                                 <div class="col-sm-4">
-                                    <input type="text" class="form-control" id="bsignkey" name="bsignkey" placeholder="输入签名秘钥串">
+                                    <input type="text" class="form-control" id="psignkey" name="psignkey" placeholder="输入签名秘钥串">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -216,8 +222,6 @@
                                         <option value="rsj/person/passengerstatid/query">个人航空出行</option>
                                         <option value="rsj/person/railwaylabel/query">个人铁路出行</option>
                                         <option value="rsj/person/network/identity_certification">个人五要素核验</option>
-                                        <option value="rsj/ent/base/get_ent_check">抽查检查</option>
-                                        <option value="rsj/ent/base/get_ent_info">工商照面信息</option>
                                     </select>
                                 </div>
                             </div>
