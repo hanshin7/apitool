@@ -39,6 +39,7 @@
                                 <label class="col-sm-2 control-label">测试接口</label>
                                 <div class="col-sm-4">
                                     <select class="form-control api-ent" name="apipath">
+                                        <option value="">无选项(手工输入)</option>
                                         <option value="rsj/ent/base/get_ent_info">工商照面信息</option>
                                         <option value="rsj/ent/base/get_ent_check">抽查检查</option>
                                         <option value="rsj/ent/base/get_ent_mort">动产抵押类信息</option>
@@ -78,6 +79,12 @@
                                         <option value="rsj/person/gsinfo/query">个人工商信息查询</option>
                                         <option value="rsj/person/gsinfo/common">个人工商信息查询(通用)</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="param1" class="col-sm-2 control-label">接口路径</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" id="apipathparam" name="apipathparam" placeholder="下拉框无则填写，如：rsj/ent/base/get_ent_info">
                                 </div>
                             </div>
                             <div class="form-group">

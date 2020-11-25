@@ -49,8 +49,13 @@ func singleQueryHandler(w http.ResponseWriter, r *http.Request) {
 	apiParams := map[string]string{}
 	//公共参数
 	apipath := params["apipath"][0]
+	apipathParam := params["apipathparam"][0]
 	apiParams["key_id"] = params["mykey"][0]
 	apiParams["sign_key"] = params["signkey"][0]
+
+	if len(apipath) == 0 && len(apipathParam) > 0 {
+		apipath = apipathParam
+	}
 	//解析自定义参数域
 	utils.ParseFormParams(params, apiParams)
 
