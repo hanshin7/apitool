@@ -11,7 +11,7 @@ func init() {
 
 	var configPath string
 	//参数值地址 参数名称 默认值 参数描述
-	flag.StringVar(&configPath, "config", "./config/config.ini", "config path.")
+	flag.StringVar(&configPath, "config", "./static/config.ini", "config path.")
 	config.InitConfig(configPath)
 	//初始化日志配置
 	level := config.Conf.Section("sys").Key("log_level").Value()

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"os/exec"
+	"path/filepath"
 	"strings"
 )
 
@@ -59,4 +61,12 @@ func appendApiParam(param string, apiParams map[string]string) {
 		arr := strings.Split(param, ":")
 		apiParams[arr[0]] = arr[1]
 	}
+}
+
+func GetAppPath() string {
+	file, _ := exec.LookPath(os.Args[0])
+	path, _ := filepath.Abs(file)
+	index := strings.LastIndex(path, string(os.PathSeparator))
+
+	return path[:index]
 }

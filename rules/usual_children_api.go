@@ -128,7 +128,8 @@ func parseChildrenData(url string, apiParam map[string]string, data map[string]i
 			baseColVal = append(baseColVal, value.(string))
 		} else {
 			//特殊接口特色处理 从请求参数获取
-			if strings.EqualFold(url, "rsj/person/gsinfo/query") {
+			if strings.EqualFold(url, "rsj/person/gsinfo/query") ||
+				strings.EqualFold(url, "rsj/person/gsinfo/common") {
 				baseColVal = append(baseColVal, apiParam[v])
 			} else {
 				baseColVal = append(baseColVal, "")
@@ -145,7 +146,17 @@ func parseChildrenData(url string, apiParam map[string]string, data map[string]i
 			v := value.(map[string]interface{})
 			lineSlice = append(lineSlice, v)
 		} else {
-			lineSlice = value.([]map[string]interface{})
+			//不为空时赋值
+			if strings.EqualFold(valType, "[]interface {}") {
+				line := value.([]interface{})
+				if len(line) > 0 {
+					for _, l := range line {
+						v := l.(map[string]interface{})
+						lineSlice = append(lineSlice, v)
+					}
+				}
+			}
+
 		}
 
 		if lineSlice != nil && len(lineSlice) > 0 {

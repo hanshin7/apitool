@@ -27,7 +27,8 @@ func StartService() {
 	http.HandleFunc("/singleQuery", singleQueryHandler)
 	http.HandleFunc("/fileQuery", uploadHandler)
 	logging.LogI("服务监听端口为[%s]\n", serverPort)
-	http.ListenAndServe("localhost:"+serverPort, nil)
+
+	http.ListenAndServe(":"+serverPort, nil)
 }
 
 //停止服务
@@ -48,6 +49,7 @@ func singleQueryHandler(w http.ResponseWriter, r *http.Request) {
 
 	apiParams := map[string]string{}
 	//公共参数
+	env := params["myenv"][0]
 	apipath := params["apipath"][0]
 	apipathParam := params["apipathparam"][0]
 	apiParams["key_id"] = params["mykey"][0]
@@ -59,7 +61,11 @@ func singleQueryHandler(w http.ResponseWriter, r *http.Request) {
 	//解析自定义参数域
 	utils.ParseFormParams(params, apiParams)
 
-	url := config.Conf.Section("sys").Key("http_path").Value() + apipath
+	http_path := "http_path"
+	if strings.EqualFold("prod", env) {
+		http_path = "http_path_prod"
+	}
+	url := config.Conf.Section("sys").Key(http_path).Value() + apipath
 	//处理接口调用业务逻辑
 	resp := utils.RequestApi(url, apiParams)
 	var apiResp model.ApiRespMsg

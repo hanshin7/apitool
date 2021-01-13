@@ -33,6 +33,7 @@ func RequestApi(url string, apiParams map[string]string) string {
 		params[k] = v
 	}
 
+	logging.LogI("访问地址为[%s]\n", url)
 	values := SignByDirectorary(params)
 	resultStr := httpPost(url, values)
 	return resultStr

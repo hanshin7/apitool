@@ -30,6 +30,8 @@ func NewParseApiStrategy(url string, fileName string, apiParams []map[string]str
 		p.Strategy = newICApi(apiParams)
 	case "rsj/person/gsinfo/query":
 		p.Strategy = newUsualChildrenApi(apiParams)
+	case "rsj/person/gsinfo/common":
+		p.Strategy = newUsualChildrenApi(apiParams)
 	case "rsj/ent/base/get_ent_check":
 		p.Strategy = newUsualChildrenApi(apiParams)
 	case "rsj/ent/base/get_ent_info":

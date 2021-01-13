@@ -24,6 +24,15 @@
                     <div class="panel-body">
                         <form class="form-horizontal" id="entform" action="/singleQuery" method="post">
                             <div class="form-group">
+                                <label for="myenv" class="col-sm-2 control-label">测试环境</label>
+                                <div class="col-sm-4">
+                                    <select class="form-control" name="myenv">
+                                        <option value="test">测试环境</option>
+                                        <option value="prod">生产环境</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label for="mykey" class="col-sm-2 control-label">机构标识</label>
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" id="mykey" name="mykey" placeholder="输入机构标识秘钥串">
